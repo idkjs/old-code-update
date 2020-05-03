@@ -29,10 +29,10 @@ Next we will run `find src -name "*.re" | yarn Upgrade` from the docs.
 Here is the output if you run the command, but don't just yet:
 
 ```sh
-~/Github/form-builder-reasonml updating* 21s
+~/Github/old-code-update-reasonml updating* 21s
 ❯ find src -name "*.re" | yarn Upgrade
 yarn run v1.22.4
-$ /Users/mandalarian/Github/form-builder-reasonml/node_modules/.bin/Upgrade
+$ /Users/mandalarian/Github/old-code-update-reasonml/node_modules/.bin/Upgrade
  UpgradeRR  Done  src/AlternateChoices.re
  UpgradeRR  Done  src/Answer.re
  UpgradeRR  Done  src/AnswerDB.re
@@ -63,7 +63,7 @@ $ /Users/mandalarian/Github/form-builder-reasonml/node_modules/.bin/Upgrade
 Done!
 ✨  Done in 0.72s.
 
-~/Github/form-builder-reasonml updating*
+~/Github/old-code-update-reasonml updating*
 ❯ 
 ```
 Let's run it and push the output to a file:
@@ -76,7 +76,7 @@ It should look something like:
 
 ```txt
 yarn run v1.22.4
-$ /Github/form-builder-reasonml/node_modules/.bin/Upgrade
+$ /Github/old-code-update-reasonml/node_modules/.bin/Upgrade
  UpgradeRR  Done  src/AlternateChoices.re
  UpgradeRR  Done  src/Answer.re
  UpgradeRR  Done  src/AnswerDB.re
@@ -185,7 +185,7 @@ So whether you had used an alias or not, everything gets handled.
 Running it looks like this:
 
 ```sh
-~/Github/form-builder-reasonml updating*
+~/Github/old-code-update-reasonml updating*
 ❯ ./replacestrings.sh
 # running reactupdate.sh ...for every file
 fastreplacestring.exe React.Update ReasonReact.Update
@@ -198,7 +198,7 @@ fastreplacestring.exe React.NoUpdate ReasonReact.NoUpdate
 fastreplacestring.exe React.UpdateWithSideEffects ReasonReact.UpdateWithSideEffects
 
 # ...abbreviated to save your eyes
-~/Github/form-builder-reasonml updating*
+~/Github/old-code-update-reasonml updating*
 ❯ 
 ```
 
@@ -251,7 +251,7 @@ npm i reason-react@latest
 Didn't work:
 
 ```sh
-~/Github/form-builder-reasonml2 updating*
+~/Github/old-code-update-reasonml2 updating*
 ❯ yarn start               
 yarn run v1.22.4
 $ bsb -make-world -w
@@ -273,7 +273,7 @@ in `package.json` and realise we have to update that too.
 Run `npm i bs-platform@latest` and we are back in business:
 
 ```sh
-~/Github/form-builder-reasonml2 updating*
+~/Github/old-code-update-reasonml2 updating*
 ❯ yarn start              
 yarn run v1.22.4
 $ bsb -make-world -w
