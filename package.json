@@ -1,0 +1,50 @@
+{
+  "name": "form-builder",
+  "version": "0.1.0",
+  "engines": {
+    "node": "10.x"
+  },
+  "scripts": {
+    "build": "bsb -make-world",
+    "start": "bsb -make-world -w",
+    "rmrf": "rm -rf lib .bsb-lock .merlin",
+    "nuke": "rm -rf lib .bsb-lock .merlin && bsb -clean-world",
+    "clean": "bsb -clean-world",
+    "test": "npm run build && jest",
+    "test:watch": "npm test -- --watch",
+    "webpack": "webpack -w",
+    "webpack:production": "NODE_ENV=production webpack",
+    "server": "node server.js",
+    "heroku-postbuild": "npm run build && npm run webpack:production"
+  },
+  "keywords": [
+    "BuckleScript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@glennsl/bs-json": "^3.0.0",
+    "bloodyowl-upgrade-reason-react": "^1.0.0",
+    "bs-css": "^7.4.0",
+    "copy-webpack-plugin": "^4.6.0",
+    "dotenv-webpack": "^1.5.7",
+    "express": "^4.16.4",
+    "firebase": "^5.5.7",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-firebaseui": "^3.1.2",
+    "reason-react": "^0.7.1",
+    "reason-react-compat": "^1.0.1",
+    "reason-react-update": "^1.0.0"
+  },
+  "devDependencies": {
+    "@glennsl/bs-jest": "^0.4.5",
+    "bs-platform": "^7.2.2",
+    "bs-react-testing-library": "^0.4.0",
+    "fastreplacestring": "github:IwanKaramazow/FastReplaceString",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.0.1",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.1.8"
+  }
+}

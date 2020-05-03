@@ -1,0 +1,85 @@
+Arguments: 
+  /Users/mandalarian/.fnm/node-versions/v10.20.1/installation/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js start
+
+PATH: 
+  /Users/mandalarian/.opam/default/bin:/var/folders/rt/7lc5vcw16459dszl8djk35fh0000gn/T/fnm-shell-9082232/bin:/Users/mandalarian/.basher/cellar/bin:/Users/mandalarian/.basher/bin:/var/folders/rt/7lc5vcw16459dszl8djk35fh0000gn/T/fnm-shell-7672066/bin:/Users/mandalarian/.cargo/bin:/Users/mandalarian/.local/bin:/usr/local/bin:/usr/local/smlnj/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Racket v7.6/bin:/Library/Apple/usr/bin:/var/folders/rt/7lc5vcw16459dszl8djk35fh0000gn/T/fnm-shell-2601381/bin:/Users/mandalarian/.opam/default/bin:/Users/mandalarian/.basher/cellar/bin:/Users/mandalarian/.basher/bin:/var/folders/rt/7lc5vcw16459dszl8djk35fh0000gn/T/fnm-shell-8709299/bin:/Users/mandalarian/.cargo/bin:/Users/mandalarian/.local/bin:/usr/local/smlnj/bin:/Users/mandalarian/dotfiles/scripts/aliases.sh:/Users/mandalarian/dotfiles/bin/:/Users/mandalarian/dotfiles/.ssh/:/Users/mandalarian/dotfiles/editors/vscode:/usr/local/opt/llvm/bin:/Users/mandalarian/smlformat:/Users/mandalarian/dotfiles/scripts/aliases.sh:/Users/mandalarian/dotfiles/bin/:/Users/mandalarian/dotfiles/.ssh/:/Users/mandalarian/dotfiles/editors/vscode:/Users/mandalarian/.local/bin:/usr/local/opt/llvm/bin:/usr/local/bin:/Users/mandalarian/smlformat:/Users/mandalarian/.basher/cellar/bin:/Users/mandalarian/.basher/bin:/var/folders/rt/7lc5vcw16459dszl8djk35fh0000gn/T/fnm-shell-7672066/bin:/Users/mandalarian/.cargo/bin:/Users/mandalarian/.local/bin:/usr/local/bin:/usr/local/smlnj/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Racket v7.6/bin:/Library/Apple/usr/bin:/var/folders/rt/7lc5vcw16459dszl8djk35fh0000gn/T/fnm-shell-2601381/bin:/Users/mandalarian/.opam/default/bin:/Users/mandalarian/.basher/cellar/bin:/Users/mandalarian/.basher/bin:/var/folders/rt/7lc5vcw16459dszl8djk35fh0000gn/T/fnm-shell-8709299/bin:/Users/mandalarian/.cargo/bin:/Users/mandalarian/.local/bin:/usr/local/smlnj/bin:/Users/mandalarian/dotfiles/scripts/aliases.sh:/Users/mandalarian/dotfiles/bin/:/Users/mandalarian/dotfiles/.ssh/:/Users/mandalarian/dotfiles/editors/vscode:/usr/local/opt/llvm/bin:/Users/mandalarian/smlformat:/Users/mandalarian/dotfiles/scripts/aliases.sh:/Users/mandalarian/dotfiles/bin/:/Users/mandalarian/dotfiles/.ssh/:/Users/mandalarian/dotfiles/editors/vscode:/Users/mandalarian/.local/bin:/usr/local/opt/llvm/bin:/usr/local/bin
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  10.20.1
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: write EIO
+      at afterWriteDispatched (internal/stream_base_commons.js:78:25)
+      at writeGeneric (internal/stream_base_commons.js:73:3)
+      at WriteStream.Socket._writeGeneric (net.js:714:5)
+      at WriteStream.Socket._write (net.js:726:8)
+      at doWrite (_stream_writable.js:415:12)
+      at writeOrBuffer (_stream_writable.js:399:5)
+      at WriteStream.Writable.write (_stream_writable.js:299:11)
+      at Object.clearLine (readline.js:1176:12)
+      at clearLine (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:49657:12)
+      at ConsoleReporter._log (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:96768:43)
+
+npm manifest: 
+  {
+    "name": "form-builder",
+    "version": "0.1.0",
+    "engines": {
+      "node": "10.x"
+    },
+    "scripts": {
+      "build": "bsb -make-world",
+      "start": "bsb -make-world -w",
+      "rmrf": "rm -rf lib .bsb-lock .merlin",
+      "nuke": "rm -rf lib .bsb-lock .merlin && bsb -clean-world",
+      "clean": "bsb -clean-world",
+      "test": "npm run build && jest",
+      "test:watch": "npm test -- --watch",
+      "webpack": "webpack -w",
+      "webpack:production": "NODE_ENV=production webpack",
+      "server": "node server.js",
+      "heroku-postbuild": "npm run build && npm run webpack:production"
+    },
+    "keywords": [
+      "BuckleScript"
+    ],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+      "@glennsl/bs-json": "^3.0.0",
+      "bloodyowl-upgrade-reason-react": "^1.0.0",
+      "bs-css": "^7.4.0",
+      "copy-webpack-plugin": "^4.6.0",
+      "dotenv-webpack": "^1.5.7",
+      "express": "^4.16.4",
+      "firebase": "^5.5.7",
+      "react": "^16.2.0",
+      "react-dom": "^16.2.0",
+      "react-firebaseui": "^3.1.2",
+      "reason-react": "^0.7.1",
+      "reason-react-compat": "^1.0.1",
+      "reason-react-update": "^1.0.0"
+    },
+    "devDependencies": {
+      "@glennsl/bs-jest": "^0.4.5",
+      "bs-platform": "^7.2.2",
+      "bs-react-testing-library": "^0.4.0",
+      "fastreplacestring": "github:IwanKaramazow/FastReplaceString",
+      "html-webpack-plugin": "^3.2.0",
+      "webpack": "^4.0.1",
+      "webpack-cli": "^3.1.1",
+      "webpack-dev-server": "^3.1.8"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
