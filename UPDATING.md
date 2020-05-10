@@ -1,12 +1,33 @@
-# Updating with [bloodyowl](https://github.com/bloodyowl/upgrade-reason-react-esy)
+# Updating Old ReasonML Code with [bloodyowl/upgrade-reason-react-esy](https://github.com/bloodyowl/upgrade-reason-react-esy)
 
-Let follow the [README](https://github.com/bloodyowl/upgrade-reason-react-esy#README.md) instructions.
+# What Is This?
+
+I have this riduculous process for figuring things out with [`reasonml`](https://reasonml.org). Basically it entails trying to do something, hitting a wall. Hitting the docs for whatever code I am trying to use, then rummaging around `Github` for some code that implements what I am trying to do.
+
+A lot of the time, that code is in old `reasonml` syntax or in `ocaml`. I end up learning the `ocaml`, converting it to `reasonml` or often times, updating old projects until they work again.
+
+Today, for example, I discovered [`Iwan Karamazow's`](https://github.com/IwanKaramazow) git repos. Had to know what his 4 year old [transducers.re](https://github.com/IwanKaramazow/transducers.re) was about. So I forked and updated it until it [compiled](https://github.com/idkjs/transducers.re). I still can't figure out how to call the functions and asked him about it. We will see if he is still interested in it. That led me to some more old code demonstrating `transducers` in [@oddlyfunctional](https://twitter.com/oddlyfunctional)'s [oddlyfunctional/bs-transducers](https://github.com/oddlyfunctional/bs-transducers), which then sent me to to his 2 year old[form-builder-reasonml](https://github.com/oddlyfunctional/form-builder-reasonml) repo which is the subject of this code study today.
+
+Thank you to Iwan and Mario for sharing their transducers!
+
+
+# Here We Go!
+
+This code is super old so we are going to have to lean on [bloodyowl/upgrade-reason-react-esy](https://github.com/bloodyowl/upgrade-reason-react-esy).
+
+Let `clone`, `fork`, `download` the target repo to get started.
+
+```sh
+git clone https://github.com/oddlyfunctional/form-builder-reasonml old-code-update
+```
+
+Let's follow the not to heavy [upgrade-reason-react-esy README](https://github.com/bloodyowl/upgrade-reason-react-esy#README.md) instructions.
 
 1. `npm i bloodyowl-upgrade-reason-react`.
 
 Trying to install fails. I am guessing its because of some `package-lock.json` dependency.
 
-Lets `rm package-lock.json` to get rid of the old deps interfereing. I am also going to get rid of the `node`,`grpc@1.13.1`, `node-pre-grp` and `bs-platform@4.0.7` files since, first, why are they there?, and second,not the point of what we are doing here.
+Lets `rm package-lock.json` to get rid of the old dependencies interfering. I am also going to get rid of the `node`,`grpc@1.13.1`, `node-pre-grp` and `bs-platform@4.0.7` files since, first, why are they there?, and second,not the point of what we are doing here.
 
 Lets run:
 
@@ -14,25 +35,25 @@ Lets run:
 rm package-lock.json node grpc@1.13.1 node-pre-grp bs-platform@4.0.7
 ``` 
 
-And try installing again, `npm install`. This takes a while because it has to build `grpc@1.13.1`. Installing fails again because the project requires `node 10.x` listed in `engines` in `package.json`. I am using `fnm` so I will add the correct version with `fnm install 10` the run `fnm use 10`. 
+Try installing again, `npm install`. This takes a while because it has to build `grpc@1.13.1`. Installing fails again because the project requires `node 10.x` listed in `engines` in `package.json`. I am using [`fnm`](https://github.com/Schniz/fnm) so I will add the expected version with `fnm install 10` the set it on this directory with `fnm use 10`. 
 
 Run `npm install` again and it works.
 
-Try installing the upgrade package again:
+Try installing the upgrade package again and it works:
 
 ```sh
 > npm i bloodyowl-upgrade-reason-react
 ```
 
-Next we will run `find src -name "*.re" | yarn Upgrade` from the docs.
+Next we will run `find src -name "*.re" | yarn Upgrade` as per the docs.
 
 Here is the output if you run the command, but don't just yet:
 
 ```sh
-~/Github/old-code-update-reasonml updating* 21s
+~/Github/old-code-update updating* 21s
 ❯ find src -name "*.re" | yarn Upgrade
 yarn run v1.22.4
-$ /Users/mandalarian/Github/old-code-update-reasonml/node_modules/.bin/Upgrade
+$ /Users/mandalarian/Github/old-code-update/node_modules/.bin/Upgrade
  UpgradeRR  Done  src/AlternateChoices.re
  UpgradeRR  Done  src/Answer.re
  UpgradeRR  Done  src/AnswerDB.re
@@ -63,10 +84,11 @@ $ /Users/mandalarian/Github/old-code-update-reasonml/node_modules/.bin/Upgrade
 Done!
 ✨  Done in 0.72s.
 
-~/Github/old-code-update-reasonml updating*
+~/Github/old-code-update updating*
 ❯ 
 ```
-Let's run it and push the output to a file:
+
+Instead of outputing the result to the terminal, let's run it and push the output to a file:
 
 ```sh
 ❯ find src -name "*.re" | yarn Upgrade > edits.cfg
@@ -76,7 +98,7 @@ It should look something like:
 
 ```txt
 yarn run v1.22.4
-$ /Github/old-code-update-reasonml/node_modules/.bin/Upgrade
+$ /Github/old-code-update/node_modules/.bin/Upgrade
  UpgradeRR  Done  src/AlternateChoices.re
  UpgradeRR  Done  src/Answer.re
  UpgradeRR  Done  src/AnswerDB.re
@@ -107,8 +129,11 @@ $ /Github/old-code-update-reasonml/node_modules/.bin/Upgrade
 Done!
 Done in 0.34s.
 ```
+Doing this will let us be a little more effecient with some terminal scripts later.
 
 # Updating Strings
+
+`@bloodyowl` again:
 
 > If you've alias ReasonReact to React, search and replace it back to ReasonReact. 
 
@@ -122,7 +147,7 @@ Done in 0.34s.
 
 > ReasonReact.NoUpdate to NoUpdate
 
-This seems a bit error prone to redo these steps every time I am up in some random old repo so I wrote this little hack using this awesome random library I came across in my random `reason` project meandering. Its called [FastReplaceString](https://github.com/IwanKaramazow/FastReplaceString) by some hacker named [Iwan Karamazow](https://github.com/IwanKaramazow) who seems to have been active in the early `reason` days. Thanks, Iwan!
+This seems a bit error prone to redo these steps every time I am up in some random old repo so I wrote this little hack using this awesome random library I came across in my random `reason` project meandering. Its called [FastReplaceString](https://github.com/IwanKaramazow/FastReplaceString) by some hacker named [Iwan Karamazow](https://github.com/IwanKaramazow) who seems to have been active in the early `reason` days. Thanks again, Iwan!
 
 Let's install his utiility:
 
@@ -130,7 +155,7 @@ Let's install his utiility:
 npm i -D IwanKaramazow/FastReplaceString
 ```
 
-Lets create a script call `reasonreactupdate.sh` and put this in it:
+Lets create a script called `reasonreactupdate.sh` and put this in it:
 
 ```sh
 #!/bin/zsh
@@ -151,12 +176,18 @@ while IFS= read -r cmd; do
 done < "$file"
 ```
 
-So what are we doing? Instead of searching for each set of string in our editor we will iterate over tuples of the edits we want to make calling each variation of what [bloodyowl](https://www.twitter.com/@bloodyowl) wants us to do with `fastreplacestring`.
+So what are we doing? Instead of searching for each set of string in our editor we will iterate over tuples of the edits we want to make calling each variation of what [bloodyowl](https://www.twitter.com/@bloodyowl) wants us to do with `fastreplacestring`. For example, the first tuple is 
 
-Just for for fun, in your are in a situation where you have aliased the `ReasonReact` as `React` we can just run both changes on all the affected files.
+```re
+("ReasonReact.Update Update")
+```
+
+So the script will go through and change all the instances of the left side, to the right side of the tuple. Or the first argument to the second argument.
+
+Just for for fun, if you are in a situation where you have aliased the `ReasonReact` as `React` we can just run both changes on all the affected files. I put each variation in a different script to keep my mind from going crazy. 
 
 ```sh
-# reactupdate.sh
+# reactupdate.sh handles getting rid of the aliases
 file=edits.cfg
 function edits(){
   for i in "React.Update ReasonReact.Update" "React.NoUpdate ReasonReact.NoUpdate" "React.UpdateWithSideEffects ReasonReact.UpdateWithSideEffects"
@@ -185,7 +216,7 @@ So whether you had used an alias or not, everything gets handled.
 Running it looks like this:
 
 ```sh
-~/Github/old-code-update-reasonml updating*
+~/Github/old-code-update updating*
 ❯ ./replacestrings.sh
 # running reactupdate.sh ...for every file
 fastreplacestring.exe React.Update ReasonReact.Update
@@ -198,13 +229,16 @@ fastreplacestring.exe React.NoUpdate ReasonReact.NoUpdate
 fastreplacestring.exe React.UpdateWithSideEffects ReasonReact.UpdateWithSideEffects
 
 # ...abbreviated to save your eyes
-~/Github/old-code-update-reasonml updating*
+~/Github/old-code-update updating*
 ❯ 
 ```
 
-## Install reason-react from [this](https://github.com/bloodyowl/reason-react) fork's master branch
+## Updating ReasonReact
 
-Now we need to install a specific version of `reason-react` as indicated by the docs and to addition `@bloodyowl` libs,`reason-react-update` and `reason-react-compat` for using the old `ReasonReact` api in your project.
+> Install reason-react from [this](https://github.com/bloodyowl/reason-react) fork's master branch.
+
+Now we need to install a specific version of `reason-react` as indicated by the docs along with two more `@bloodyowl` libs,`reason-react-update` and `reason-react-compat`. These will allow us to keep using the old `ReasonReact` api the project.
+
 Needless to say, `@bloodyowl` is a boss.
 
 Run:
@@ -242,7 +276,7 @@ I know the solution is to add the latest version of `reason-react` but I'm mildl
 
 > Update places where you use DOM refs (whether use React.createRef or React.useRef above your components).
 
-I just searched for `useRef` and `createRef` in the project and found nothing so just going to go ahead and install `reason-react@latest`.
+I just searched for `useRef` and `createRef` in the project and found nothing so I'm just going to go ahead and install `reason-react@latest`.
 
 ```sh
 npm i reason-react@latest
@@ -251,7 +285,7 @@ npm i reason-react@latest
 Didn't work:
 
 ```sh
-~/Github/old-code-update-reasonml2 updating*
+~/Github/old-code-update2 updating*
 ❯ yarn start               
 yarn run v1.22.4
 $ bsb -make-world -w
@@ -273,7 +307,7 @@ in `package.json` and realise we have to update that too.
 Run `npm i bs-platform@latest` and we are back in business:
 
 ```sh
-~/Github/old-code-update-reasonml2 updating*
+~/Github/old-code-update2 updating*
 ❯ yarn start              
 yarn run v1.22.4
 $ bsb -make-world -w
@@ -288,9 +322,9 @@ $ bsb -make-world -w
 
 # Working Through Errors
 
-The first error we see is stupid, `Error: Unbound module ReactCompat`.
+The first error we see is knuckleheadish: `Error: Unbound module ReactCompat`.
 
-When we install the two lib, `reason-react-compat` and `reason-react-updates` we forgot to add them to `bsconfig.json`. I used to have a script in my dotfiles that handled this, then I accidently deleted them. And now thanks [learning in public](https://www.swyx.io/writing/learn-in-public/), I figured I should go ahead and figure it out again so you can use it too.
+When we installed the two libs, `reason-react-compat` and `reason-react-update` I forgot to add them to `bsconfig.json`. I used to have a script in my dotfiles that handled this, then I accidently deleted them. And now thanks to [learning in public](https://www.swyx.io/writing/learn-in-public/), I figured I should go ahead and figure it out again so you can use it too.
 
 ```sh
 # script to add dependency to `packag.json.dependecies` and `bsconfig.[bs-dependencies]`
@@ -306,6 +340,8 @@ function _add_bs_dependency(){
   echo ✨${NEWDEP} added to bs-dependencies ✨
 }
 ```
+
+I am so happy to have this script back. One command to install a `bs-dependency`.
 
 Stick that in your dotfiles and run `addbs reason-react-compat` and `addbs reason-react-update`.
 
@@ -333,14 +369,15 @@ After restarting the project we should be getting a bunch of errors referrencing
   ReactCompat.useRecordApi({
     ...component,
 ```
+
 We must hit the [`reason-react-compat docs`](
-https://github.com/bloodyowl/reason-react-compat#stateless-components) here. There is a path to upgrading so lets follow it. We need to change all instances of `...component,` to `...component`. Wait, those are strings! I wonder if [`FastReplaceString`](https://github.com/IwanKaramazow/FastReplaceString) can handle it. Better yet, I just remembered I have `replace` script. Let's try it.
+https://github.com/bloodyowl/reason-react-compat#stateless-components) here. There is a path to upgrading so lets follow it. We need to change all instances of `...component,` to `...ReactCompat.component`. Wait, those are strings! I wonder if [`FastReplaceString`](https://github.com/IwanKaramazow/FastReplaceString) can handle it. Better yet, I just remembered I have `replace` script. Let's try it.
 
 We could try running:
 
 ```sh
 # outputs just list of places wher are string shows up and pipe it to faststring replace
-grep -rnwl 'src' -e '...component'  | fastreplacestring.exe "...component" "...component"
+grep -rnwl 'src' -e '...component'  | fastreplacestring.exe "...component" "...ReactCompat.component"
 ```
 
 But it needs some tweaking to work.
@@ -373,4 +410,9 @@ for item in $items; do
 done
 ```
 
-Running `replace "...component" "...component"` works fantastically.
+Running `replace "...component" "...ReactCompat.component"` works fantastically.
+
+
+Well that's it for now, folks. I can't promise I will finish this update because I got what I needed from it.
+
+This has been [learning in public](https://www.swyx.io/writing/learn-in-public/).

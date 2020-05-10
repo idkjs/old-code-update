@@ -2,7 +2,7 @@
 
 files=$1
 function edits(){
-  for i in "...component" "...component"
+  for i in "...component" "...ReactCompat.component"
 do
     set -- $i
     echo fastreplacestring.exe $1 $2
