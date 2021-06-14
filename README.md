@@ -1,6 +1,6 @@
 # old-code-update
 
-## Read the [Post on dev.to](dev.to/idkjs/updating-old-reasonml-code-268p)
+## Read the [Post on dev.to](https://dev.to/idkjs/updating-old-reasonml-code-268p)
 ## Run Project
 
 ```sh
